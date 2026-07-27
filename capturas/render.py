@@ -224,9 +224,43 @@ PS1 = PS0[:-1] + [
     [('PS C:\\Windows\\system32> ', 'White'), (CMD[:52], 'Yellow')],
     [(CMD[52:], 'Yellow'), ('▌', 'Gray')]]
 
+
+# --- menu de MAS 3.12, copiado literal de MAS_AIO.cmd --------------------
+def _mas_op(num, nombre, resto, verde=True):
+    return [('             [' + num + '] ', 'White'),
+            (nombre.ljust(20), 'Green' if verde else 'White'), (resto, 'White')]
+
+MAS = [v(),
+    [('       ' + '_' * 62, 'White')], v(),
+    [('                 Activation Methods:', 'White')], v(),
+    _mas_op('1', 'HWID', '- Windows'),
+    _mas_op('2', 'Ohook', '- Office'),
+    _mas_op('3', 'TSforge', '- Windows / Office / ESU'),
+    _mas_op('4', 'Online KMS', '- Windows / Office', False),
+    [('             ' + '_' * 50, 'White')], v(),
+    [('             [5] Check Activation Status', 'White')],
+    [('             [6] Change Windows Edition', 'White')],
+    [('             [7] Change Office Edition', 'White')],
+    [('             ' + '_' * 50, 'White')], v(),
+    [('             [8] Troubleshoot', 'White')],
+    [('             [E] Extras', 'White')],
+    [('             [H] Help', 'White')],
+    [('             [0] Exit', 'White')],
+    [('       ' + '_' * 62, 'White')], v(),
+    [('         ', 'White'),
+     ('Choose a menu option using your keyboard [1,2,3...E,H,0] :', 'Green')]]
+
+# --- pantalla de exito de Ohook (texto literal de MAS) -------------------
+MASOK = [v(), v(),
+    [('Office is permanently activated.', 'Green')],
+    [("Office apps such as Word, Excel are activated, use them directly.", 'Gray')],
+    [("Ignore 'Buy' button in Office dashboard app.", 'Gray')],
+    [('Help: https://massgrave.dev/troubleshoot', 'White')], v(),
+    [('Press any key to go back to main menu...', 'White')]]
+
 PANTALLAS = [('P1', P1), ('P2', P2), ('P3', P3), ('P4', P4),
              ('P5', P5), ('P6', P6), ('P7', P7), ('P8', P8),
-             ('PS0', PS0), ('PS1', PS1)]
+             ('PS0', PS0), ('PS1', PS1), ('MAS', MAS), ('MASOK', MASOK)]
 
 # ------------------------------------------------------------------ util
 def idx(pantalla, sub):
@@ -352,6 +386,20 @@ def render(pantalla, salida, marcas=(), flechas=(),
 
 def figuras():
     F = []
+
+    # --- el menu de MAS ya abierto
+    F.append(('figura-mas1.png', MAS, [], [
+        ('ESCRIBE EL 2\npara activar Office',
+         idx(MAS, '[2] Ohook'), 13),
+        ('El 5 sirve para comprobar\nsi quedo activado',
+         idx(MAS, '[5] Check Activation'), 13),
+        ('El 0 para salir de MAS',
+         idx(MAS, '[0] Exit'), 13)]))
+
+    # --- la senal de exito de MAS
+    F.append(('figura-mas2.png', MASOK, [], [
+        ('ESTA LINEA VERDE\nes la senal de que\nOffice quedo activado',
+         idx(MASOK, 'permanently activated'), 33)]))
 
     # --- PowerShell recien abierta como administrador
     F.append(('figura-ps1.png', PS0, [], [
@@ -528,7 +576,7 @@ if __name__ == '__main__':
     check()
     base = '/mnt/disco1tb/diego/office_script/capturas/'
     for n, p in PANTALLAS:
-        if n.startswith('PS'):
+        if n.startswith('PS') or n.startswith('MAS'):
             render(p, f'{base}pantalla-{n.lower()}.png',
                    titulo_ventana='Administrador: Windows PowerShell', fondo=AZUL_PS)
         else:
@@ -536,6 +584,10 @@ if __name__ == '__main__':
     figs = figuras()          # si una ancla desaparece, revienta aqui
     print('CHECK anclas de figura: OK  (%d figuras)' % len(figs))
     for nombre, pantalla, marcas, flechas in figs:
+        if nombre.startswith('figura-mas'):
+            print(' ->', render(pantalla, base + nombre, marcas, flechas,
+                                'Administrador: Microsoft Activation Scripts 3.12', AZUL_PS))
+            continue
         if nombre.startswith('figura-ps'):
             print(' ->', render(pantalla, base + nombre, marcas, flechas,
                                 'Administrador: Windows PowerShell', AZUL_PS))

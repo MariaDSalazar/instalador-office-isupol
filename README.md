@@ -81,10 +81,11 @@ lanzarlo y explica cómo apagar temporalmente la protección en tiempo real.
 
 ## Manual para principiantes
 
-`MANUAL-Instalar-Office.pdf` (13 páginas) explica todo desde encender la
-computadora, siguiendo el formato oficial de tareas del Instituto. También está en
-`.docx` para editarlo en Word y en `.html`, que es el original del que salen los
-otros dos.
+`MANUAL-Instalar-Office.pdf` (16 páginas, 23 figuras) explica todo desde encender la
+computadora hasta activar Office, siguiendo el formato oficial de tareas del Instituto.
+Enseña la vía del comando en PowerShell, con la del doble clic como alternativa.
+También está en `.docx` para editarlo en Word y en `.html`, que es el original del que
+salen los otros dos.
 
 Para regenerarlo después de editar el HTML:
 
@@ -97,11 +98,14 @@ weasyprint MANUAL-Instalar-Office.html MANUAL-Instalar-Office.pdf
 En `capturas/` están las pantallas del programa:
 
 - `pantalla-pN.png` — limpias
-- `figura-NN.png` — con los recuadros rojos numerados que usa el manual
+- `figura-NN.png` — con los recuadros y flechas rojas que usa el manual
+- `figura-ps*.png`, `figura-mas*.png` — PowerShell y el menú de MAS
+- `figura-web1.png`, `figura-win*.png` — la página del repo y las pantallas de Windows
 
-`capturas/render.py` las regenera (`python3 render.py`) y de paso comprueba dos
-cosas: que ninguna caja del script quede desalineada, y que cada recuadro del manual
-siga apuntando a un texto que existe de verdad en la pantalla.
+`capturas/render.py` regenera las de consola (`python3 render.py`) y de paso comprueba
+dos cosas: que ninguna caja del script quede desalineada, y que cada flecha del manual
+siga apuntando a un texto que existe de verdad en la pantalla. `capturas/web.py` genera
+la de la página del repositorio (captura real con Chrome) y las dos de Windows.
 
 ## Aviso
 

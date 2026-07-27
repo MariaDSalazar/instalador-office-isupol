@@ -1,3 +1,9 @@
 # Material del curso que no forma parte del instalador
 03_MAS_Manual_Paso_a_Paso.pdf
 PLANTILLA PARA LA TAREA 2 DE LA UNIDAD 1.docx
+
+# Se quedan en local: el repo publica solo el script y el manual en PDF
+Instalar-Office.cmd
+MANUAL-Instalar-Office.html
+MANUAL-Instalar-Office.docx
+capturas/gen_manual.py

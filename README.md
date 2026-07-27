@@ -1,51 +1,55 @@
 # Instalador de Office · ISUPOL
 
-Instituto Superior Tecnológico Policía Nacional
+**Instituto Superior Tecnológico Policía Nacional**
 Tecnología Superior Universitaria en Prevención del Delito y Seguridad Ciudadana
 
-**Asignatura:** Competencias Digitales · Unidad 1 de 3
-**Docente:** Mgtr. María del Carmen Salazar Torres · **Sección:** C
+| | |
+|---|---|
+| **Asignatura** | Competencias Digitales · Unidad 1 de 3 |
+| **Docente** | Mgtr. María del Carmen Salazar Torres |
+| **Curso / Paralelo** | Sección C |
 
-Instala Office descargándolo directamente de los servidores de Microsoft
-(`officecdn.microsoft.com` y `c2rsetup.officeapps.live.com`). No usa páginas de
-terceros ni archivos de dudosa procedencia.
+Instala Microsoft Office descargándolo **directamente de los servidores de Microsoft**
+(`officecdn.microsoft.com` y `c2rsetup.officeapps.live.com`). No usa páginas de terceros
+ni archivos de dudosa procedencia.
 
-Material educativo para practicar en laboratorio.
+Material educativo para practicar en un entorno de laboratorio.
 
 ![Menú del instalador](capturas/pantalla-p1.png)
 
 ---
 
-## Forma 1 · Un solo comando
+## Cómo se usa
 
-Abre **PowerShell como administrador** (tecla Windows → escribe `PowerShell` →
-clic derecho → *Ejecutar como administrador*) y pega:
+Abra **PowerShell como administrador** — tecla <kbd>Windows</kbd> → escriba `PowerShell`
+→ *Ejecutar como administrador* → **Sí** — y pegue esta línea con clic derecho:
 
 ```powershell
 irm https://raw.githubusercontent.com/MariaDSalazar/instalador-office-isupol/main/office-isupol.ps1 | iex
 ```
 
-## Forma 2 · Doble clic
+Pulse <kbd>Enter</kbd> y aparecerá el menú. A partir de ahí todo se elige escribiendo un
+número.
 
-1. Descarga `office-isupol.ps1` y `Instalar-Office.cmd` **en la misma carpeta**.
-2. Doble clic en `Instalar-Office.cmd`.
-3. Acepta el aviso de permisos de administrador.
-
----
+> **Importante:** debe ser PowerShell *como administrador*. Sin esos permisos el
+> instalador se detiene con un aviso en rojo.
 
 ## El menú
 
 | Opción | Qué hace |
-|---|---|
-| 1 | Office 2016 Professional Plus (suite completa) |
-| 2 | Office 2019 Professional Plus (Word, Excel, PowerPoint) |
-| 3 | Office LTSC 2021 Professional Plus (Word, Excel, PowerPoint) |
-| 4 | Office LTSC 2024 Professional Plus (Word, Excel, PowerPoint) |
-| 5 | Activar con MAS ([massgrave.dev](https://massgrave.dev)) |
-| 6 | Ver qué Office hay instalado y su estado de licencia |
-| 7 | Desinstalar Office |
-| 8 | Ayuda |
-| 9 | Salir |
+|:---:|---|
+| **1** | Office 2016 Professional Plus — suite completa |
+| **2** | Office 2019 Professional Plus — Word, Excel, PowerPoint |
+| **3** | Office LTSC 2021 Professional Plus — Word, Excel, PowerPoint |
+| **4** | Office LTSC 2024 Professional Plus — Word, Excel, PowerPoint |
+| **5** | Activar con MAS ([massgrave.dev](https://massgrave.dev)) |
+| **6** | Ver qué Office hay instalado y su estado de licencia |
+| **7** | Desinstalar Office |
+| **8** | Ayuda dentro del propio programa |
+| **9** | Salir |
+
+En la opción **7** los números están invertidos a propósito: el **1 cancela** y solo el
+**2** borra, para que nadie desinstale Office por inercia.
 
 ## Requisitos
 
@@ -56,6 +60,24 @@ irm https://raw.githubusercontent.com/MariaDSalazar/instalador-office-isupol/mai
 
 El script comprueba los cuatro al arrancar y avisa si falta alguno.
 
+## Manual para principiantes
+
+**[MANUAL-Instalar-Office.pdf](MANUAL-Instalar-Office.pdf)** — 16 páginas, 22 figuras con
+flechas rojas. Explica todo desde encender la computadora hasta comprobar que Office quedó
+activado, sin dar nada por sabido. Incluye glosario ilustrado y una sección con los errores
+más frecuentes.
+
+## Si algo falla
+
+| Mensaje | Solución |
+|---|---|
+| `...la ejecución de scripts está deshabilitada en este sistema` | Ejecute `Set-ExecutionPolicy Bypass -Scope Process -Force` y vuelva a pegar el comando. Solo afecta a esa ventana. |
+| `'irm' no se reconoce como un comando interno o externo` | El comando se pegó en CMD. Debe usarse **PowerShell** (fondo azul oscuro, título `PS C:\...`). |
+| `No se puede establecer un canal seguro para SSL/TLS` | Windows sin actualizar. El script ya fuerza TLS 1.2; si aun así falla, ejecute antes `[Net.ServicePointManager]::SecurityProtocol = 'Tls12'`. |
+| `FALTAN PERMISOS DE ADMINISTRADOR` | PowerShell se abrió con «Abrir» en vez de «Ejecutar como administrador». |
+
+El manual desarrolla cada uno con el texto exacto del error y capturas.
+
 ## Detalles técnicos
 
 | Versión | Product ID | Canal / método |
@@ -65,50 +87,32 @@ El script comprueba los cuatro al arrancar y avisa si falta alguno.
 | 2021 | `ProPlus2021Volume` | `PerpetualVL2021` (ODT) |
 | 2024 | `ProPlus2024Volume` | `PerpetualVL2024` (ODT) |
 
-Office 2016 no existe en el Office Deployment Tool moderno, por eso va por otra
-ruta. Esa vía no permite excluir aplicaciones, así que instala la suite entera.
-Las demás versiones sí quedan solo con Word, Excel y PowerPoint.
+Office 2016 no existe en el Office Deployment Tool moderno, por eso va por otra ruta. Esa
+vía no permite excluir aplicaciones, así que instala la suite entera. Las demás versiones
+quedan solo con Word, Excel y PowerPoint: el resto se excluye vía `<ExcludeApp>`.
 
 ## Antivirus
 
-El instalador en sí no debería dar problemas: descarga de dominios de Microsoft
-y no hace nada ofuscado. El `.cmd` ejecuta `Unblock-File` para quitar la marca de
-"archivo bajado de internet" que si no hace que PowerShell se niegue a abrirlo.
+El instalador no debería dar problemas: descarga de dominios de Microsoft y no hace nada
+ofuscado.
 
-**MAS sí es detectado por Windows Defender**, siempre, por diseño — está
-advertido en la propia web de massgrave.dev. El script lo avisa antes de
-lanzarlo y explica cómo apagar temporalmente la protección en tiempo real.
-
-## Manual para principiantes
-
-`MANUAL-Instalar-Office.pdf` (16 páginas, 23 figuras) explica todo desde encender la
-computadora hasta activar Office, siguiendo el formato oficial de tareas del Instituto.
-Enseña la vía del comando en PowerShell, con la del doble clic como alternativa.
-También está en `.docx` para editarlo en Word y en `.html`, que es el original del que
-salen los otros dos.
-
-Para regenerarlo después de editar el HTML:
-
-```bash
-weasyprint MANUAL-Instalar-Office.html MANUAL-Instalar-Office.pdf
-```
+**MAS sí es detectado por Windows Defender**, siempre y por diseño — está advertido en la
+propia web de massgrave.dev. El script lo avisa antes de lanzarlo y explica cómo apagar
+temporalmente la protección en tiempo real y volver a encenderla al terminar.
 
 ## Capturas
 
-En `capturas/` están las pantallas del programa:
+En `capturas/` están todas las pantallas del programa:
 
-- `pantalla-pN.png` — limpias
-- `figura-NN.png` — con los recuadros y flechas rojas que usa el manual
-- `figura-ps*.png`, `figura-mas*.png` — PowerShell y el menú de MAS
-- `figura-web1.png`, `figura-win*.png` — la página del repo y las pantallas de Windows
+- `pantalla-*.png` — limpias
+- `figura-*.png` — con los recuadros y flechas rojas que usa el manual
 
-`capturas/render.py` regenera las de consola (`python3 render.py`) y de paso comprueba
-dos cosas: que ninguna caja del script quede desalineada, y que cada flecha del manual
-siga apuntando a un texto que existe de verdad en la pantalla. `capturas/web.py` genera
-la de la página del repositorio (captura real con Chrome) y las dos de Windows.
+Se regeneran con `python3 capturas/render.py`, que además comprueba dos cosas: que ninguna
+caja del menú quede desalineada y que cada flecha del manual siga apuntando a un texto que
+existe de verdad en la pantalla. `capturas/web.py` genera las dos pantallas de Windows.
 
 ## Aviso
 
-Activar productos sin pagar la licencia va contra los términos de Microsoft.
-Este material es para entender cómo funciona el mecanismo en un entorno de
-laboratorio. Al terminar la práctica, restaura el snapshot de la máquina virtual.
+Activar productos sin pagar la licencia va contra los términos de Microsoft. Este material
+sirve para entender cómo funciona el mecanismo en un entorno de laboratorio. Al terminar la
+práctica, restaure el snapshot de la máquina virtual.

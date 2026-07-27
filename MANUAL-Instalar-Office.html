@@ -54,13 +54,22 @@
              font-size: 9.5pt; margin: 12px 0; }
 
   ol.pasos { padding-left: 0; counter-reset: p; list-style: none; margin: 10px 0; }
-  ol.pasos > li { counter-increment: p; position: relative; padding-left: 34px;
-                  margin-bottom: 9px; page-break-inside: avoid; font-size: 10pt; }
-  ol.pasos > li::before { content: counter(p); position: absolute; left: 0; top: 1px;
-      width: 22px; height: 22px; background: #0d3b66; color: #fff; border-radius: 50%;
-      font-family: "DejaVu Sans", sans-serif; font-size: 9pt; font-weight: bold;
-      text-align: center; line-height: 22px; }
-  ol.pasos .sub { display: block; font-size: 9pt; color: #555; margin-top: 2px; }
+  ol.pasos > li { counter-increment: p; position: relative; padding: 9px 12px 9px 48px;
+                  margin-bottom: 7px; page-break-inside: avoid; font-size: 10pt;
+                  background: #f6f8fa; border: 1px solid #e3e9ef; border-radius: 6px; }
+  ol.pasos > li::before { content: counter(p); position: absolute; left: 12px; top: 10px;
+      width: 24px; height: 24px; background: #2166ac; color: #fff; border-radius: 50%;
+      font-family: "DejaVu Sans", sans-serif; font-size: 9.5pt; font-weight: bold;
+      text-align: center; line-height: 24px; }
+  ol.pasos .sub { display: block; font-size: 9pt; color: #555; margin-top: 3px; }
+
+  /* glosario e iconos */
+  table.glos2 { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 9.5pt; }
+  table.glos2 td { border: 1px solid #dde4ea; padding: 7px 10px; vertical-align: middle; }
+  table.glos2 td.ic { width: 46px; text-align: center; background: #f6f8fa; }
+  table.glos2 tr:nth-child(even) td { background: #fbfcfd; }
+  table.glos2 tr:nth-child(even) td.ic { background: #f2f5f8; }
+  .ico { vertical-align: -3px; }
 
   .tecla { font-family: "DejaVu Sans", sans-serif; font-size: 8.5pt; border: 1px solid #999;
            border-bottom-width: 2px; border-radius: 3px; padding: 1px 6px; background: #fafafa; }
@@ -133,20 +142,21 @@ significa «y luego» (por ejemplo: haz clic → escribe → pulsa Enter). Los n
 que escribir en el programa aparecen así: <span class="num">3</span>.</div>
 
 <h3>2. Pequeño glosario (palabras que vamos a usar)</h3>
-<dl class="glos">
-  <dt>Clic</dt><dd>Presionar una vez el botón izquierdo del ratón (el mouse).</dd>
-  <dt>Doble clic</dt><dd>Presionar ese mismo botón dos veces seguidas y rápido.</dd>
-  <dt>Clic derecho</dt><dd>Presionar el botón derecho del ratón. Casi siempre abre un menucito con opciones.</dd>
-  <dt>Navegador</dt><dd>El programa para entrar a internet (Google Chrome o Microsoft Edge).</dd>
-  <dt>Barra de direcciones</dt><dd>La barra larga de arriba del navegador, donde se escribe la dirección de una página.</dd>
-  <dt>Menú Inicio</dt><dd>El menú que se abre al presionar la tecla <span class="tecla">Windows</span> (abajo a la izquierda).</dd>
-  <dt>Barra de tareas</dt><dd>La barra de iconos que está abajo del todo de la pantalla.</dd>
-  <dt>PowerShell</dt><dd>Un programa de Windows con fondo azul oscuro donde se escriben órdenes con el teclado. No tiene botones.</dd>
-  <dt>Comando</dt><dd>Una línea de texto que se le da a PowerShell para que haga algo. Nosotros la vamos a copiar y pegar, no a escribir a mano.</dd>
-  <dt>Administrador</dt><dd>Permiso especial que Windows pide para instalar programas. Sin él, la instalación no puede ni empezar.</dd>
-  <dt>Copiar y pegar</dt><dd>Copiar es guardar un texto en la memoria (<span class="tecla">Ctrl</span>+<span class="tecla">C</span>); pegar es soltarlo donde quieras (<span class="tecla">Ctrl</span>+<span class="tecla">V</span>).</dd>
-  <dt>Activar</dt><dd>Darle a Office una licencia para que funcione sin límites ni avisos.</dd>
-</dl>
+<table class="glos2">
+  <tr><td class="ic"><svg class="ico" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="7" y="2" width="10" height="20" rx="5" fill="none" stroke="#2166ac" stroke-width="1.7"/><path d="M12 2.5v7M7.4 9.5h9.2" stroke="#2166ac" stroke-width="1.4"/><path d="M8 4.5a4.4 4.4 0 0 1 3.4-2.3V9H7.6z" fill="#2166ac"/></svg></td><td><b>Clic:</b> Presionar una vez el botón izquierdo del ratón (el mouse).</td></tr>
+  <tr><td class="ic"><svg class="ico" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="7" y="2" width="10" height="20" rx="5" fill="none" stroke="#2166ac" stroke-width="1.7"/><path d="M12 2.5v7M7.4 9.5h9.2" stroke="#2166ac" stroke-width="1.4"/><path d="M8 4.5a4.4 4.4 0 0 1 3.4-2.3V9H7.6z" fill="#2166ac"/><path d="M18.5 4.5l2 1M18.5 7l2 .4" stroke="#2166ac" stroke-width="1.4" stroke-linecap="round"/></svg></td><td><b>Doble clic:</b> Presionar ese mismo botón dos veces seguidas y rápido.</td></tr>
+  <tr><td class="ic"><svg class="ico" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="7" y="2" width="10" height="20" rx="5" fill="none" stroke="#2166ac" stroke-width="1.7"/><path d="M12 2.5v7M7.4 9.5h9.2" stroke="#2166ac" stroke-width="1.4"/><path d="M12.6 2.2A4.4 4.4 0 0 1 16 4.5V9h-3.4z" fill="#2166ac"/></svg></td><td><b>Clic derecho:</b> Presionar el botón derecho del ratón. Casi siempre abre un menucito con opciones.</td></tr>
+  <tr><td class="ic"><svg class="ico" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9.2" fill="none" stroke="#2166ac" stroke-width="1.7"/><ellipse cx="12" cy="12" rx="4" ry="9.2" fill="none" stroke="#2166ac" stroke-width="1.3"/><path d="M3 12h18M4.6 7h14.8M4.6 17h14.8" stroke="#2166ac" stroke-width="1.2"/></svg></td><td><b>Navegador:</b> El programa para entrar a internet (Google Chrome o Microsoft Edge).</td></tr>
+  <tr><td class="ic"><svg class="ico" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="1.5" y="7" width="21" height="10" rx="5" fill="none" stroke="#2166ac" stroke-width="1.7"/><rect x="5" y="10.4" width="3" height="3.6" rx="1" fill="#2166ac"/><path d="M10 12h9" stroke="#2166ac" stroke-width="1.5"/></svg></td><td><b>Barra de direcciones:</b> La barra larga de arriba del navegador, donde se escribe la dirección de una página.</td></tr>
+  <tr><td class="ic"><svg class="ico" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="2.5" y="3" width="8.4" height="8" fill="#2166ac"/><rect x="13.1" y="3" width="8.4" height="8" fill="#2166ac"/><rect x="2.5" y="13" width="8.4" height="8" fill="#2166ac"/><rect x="13.1" y="13" width="8.4" height="8" fill="#2166ac"/></svg></td><td><b>Menú Inicio:</b> El menú que se abre al presionar la tecla <span class="tecla">Windows</span> (abajo a la izquierda).</td></tr>
+  <tr><td class="ic"><svg class="ico" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="1.5" y="14" width="21" height="7" rx="1.5" fill="none" stroke="#2166ac" stroke-width="1.7"/><rect x="4" y="16.2" width="3.4" height="3.4" rx=".7" fill="#2166ac"/><rect x="9" y="16.2" width="3.4" height="3.4" rx=".7" fill="#2166ac"/><rect x="14" y="16.2" width="3.4" height="3.4" rx=".7" fill="#2166ac"/></svg></td><td><b>Barra de tareas:</b> La barra de iconos que está abajo del todo de la pantalla.</td></tr>
+  <tr><td class="ic"><svg class="ico" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="1.5" y="3.5" width="21" height="17" rx="2" fill="#012456"/><path d="M6 8.5l4 3.4-4 3.4M11.5 16h6" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></td><td><b>PowerShell:</b> Un programa de Windows con fondo azul oscuro donde se escriben órdenes con el teclado. No tiene botones.</td></tr>
+  <tr><td class="ic"><svg class="ico" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="1.5" y="4.5" width="21" height="15" rx="2" fill="none" stroke="#2166ac" stroke-width="1.7"/><path d="M5.5 9h13M5.5 12h9M5.5 15h6" stroke="#2166ac" stroke-width="1.5" stroke-linecap="round"/></svg></td><td><b>Comando:</b> Una línea de texto que se le da a PowerShell para que haga algo. Nosotros la vamos a copiar y pegar, no a escribir a mano.</td></tr>
+  <tr><td class="ic"><svg class="ico" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.2l8 3v6c0 5-3.4 9.2-8 10.6C7.4 20.4 4 16.2 4 11.2v-6z" fill="none" stroke="#2166ac" stroke-width="1.7"/><path d="M8.4 11.8l2.5 2.6 4.7-5" stroke="#2166ac" stroke-width="1.9" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></td><td><b>Administrador:</b> Permiso especial que Windows pide para instalar programas. Sin él, la instalación no puede ni empezar.</td></tr>
+  <tr><td class="ic"><svg class="ico" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="8" width="13" height="13" rx="2" fill="none" stroke="#2166ac" stroke-width="1.7"/><path d="M16 5.5V4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h1.5" fill="none" stroke="#2166ac" stroke-width="1.7"/></svg></td><td><b>Copiar y pegar:</b> Copiar es guardar un texto en la memoria (<span class="tecla">Ctrl</span>+<span class="tecla">C</span>); pegar es soltarlo donde quieras (<span class="tecla">Ctrl</span>+<span class="tecla">V</span>).</td></tr>
+  <tr><td class="ic"><svg class="ico" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="1.5" y="3.5" width="21" height="17" rx="2" fill="#0C0C0C" stroke="#555" stroke-width="1"/><path d="M5 9l3.4 2.8L5 14.6" stroke="#16C60C" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 15.4h7" stroke="#16C60C" stroke-width="1.7" stroke-linecap="round"/></svg></td><td><b>Ventana negra (consola):</b> Una ventana sin botones donde todo se hace escribiendo números y pulsando <span class="tecla">Enter</span>. Es la que vamos a usar.</td></tr>
+  <tr><td class="ic"><svg class="ico" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="7.5" cy="12" r="4.2" fill="none" stroke="#2166ac" stroke-width="1.8"/><path d="M11.7 12H21m-3 0v3.4m-3-3.4v2.4" stroke="#2166ac" stroke-width="1.8" stroke-linecap="round"/></svg></td><td><b>Activar:</b> Darle a Office una licencia para que funcione sin límites ni avisos.</td></tr>
+</table>
 
 <h3>3. Historias de usuario (para qué sirve esto)</h3>
 <ul class="chico">
@@ -167,7 +177,7 @@ snapshot y el equipo vuelve a quedar como estaba.</div>
 <ol class="pasos">
   <li>Presiona el botón de encendido <b>una sola vez</b> y suéltalo.
       <span class="sub">En una computadora de escritorio está en la torre (la caja grande).
-      En una laptop, arriba del teclado.</span></li>
+      En una laptop, arriba del teclado. Tiene dibujado este símbolo: <svg class="ico" width="17" height="17" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 3.2v8.4" stroke="#333" stroke-width="2.3" stroke-linecap="round"/><path d="M7 6.6a7.4 7.4 0 1 0 10 0" fill="none" stroke="#333" stroke-width="2.3" stroke-linecap="round"/></svg></span></li>
   <li>Espera sin tocar nada.
       <span class="sub">Verás luces y quizá un logo. Puede tardar uno o dos minutos. Es normal.</span></li>
   <li>Aparece una pantalla con la hora (se llama pantalla de bloqueo). Presiona cualquier
@@ -179,15 +189,17 @@ snapshot y el equipo vuelve a quedar como estaba.</div>
 
 <h4 class="paso">Paso B. Abrir el navegador (Chrome o Edge)</h4>
 <p class="chico">El navegador es el programa para entrar a internet. Busca uno de estos dos iconos:</p>
-<ul class="chico">
-  <li><b>Google Chrome:</b> un círculo de colores (rojo, amarillo y verde) con un punto azul en el centro.</li>
-  <li><b>Microsoft Edge:</b> una ola o remolino en tonos azul y verde.</li>
-</ul>
+<table class="glos2">
+  <tr><td class="ic"><svg class="ico" width="27" height="27" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg"><circle cx="18" cy="18" r="14" fill="none" stroke="#EA4335" stroke-width="8" stroke-dasharray="29.3 58.6" transform="rotate(-90 18 18)"/><circle cx="18" cy="18" r="14" fill="none" stroke="#FBBC05" stroke-width="8" stroke-dasharray="29.3 58.6" transform="rotate(30 18 18)"/><circle cx="18" cy="18" r="14" fill="none" stroke="#34A853" stroke-width="8" stroke-dasharray="29.3 58.6" transform="rotate(150 18 18)"/><circle cx="18" cy="18" r="7.6" fill="#fff"/><circle cx="18" cy="18" r="5.4" fill="#4285F4"/></svg></td><td><b>Google Chrome:</b> un círculo de colores
+      (rojo, amarillo y verde) con un punto azul en el centro.</td></tr>
+  <tr><td class="ic"><svg class="ico" width="27" height="27" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg"><circle cx="18" cy="18" r="15" fill="#0B65A5"/><path d="M4 20c3 8 13 11 20 7-7 2-14-1-16-7z" fill="#2CC3A8"/><path d="M5 14c3-7 12-9 18-5-6-1-13 1-15 6z" fill="#43D0F5"/><path d="M14 9c7-2 14 2 15 8-1-4-6-7-11-6z" fill="#8FE3C8"/></svg></td><td><b>Microsoft Edge:</b> una ola o remolino en tonos
+      azul y verde.</td></tr>
+</table>
 <ol class="pasos">
   <li>Mira en la barra de abajo (barra de tareas) o en el escritorio. ¿Ves uno de esos
       iconos? Haz clic (o doble clic si está en el escritorio).</li>
   <li>¿No lo encuentras? Presiona la tecla <span class="tecla">Windows</span> del teclado
-      (la que tiene la ventanita). Se abre el menú Inicio.</li>
+      (la que tiene la ventanita <svg class="ico" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="2.5" y="3" width="8.4" height="8" fill="#2166ac"/><rect x="13.1" y="3" width="8.4" height="8" fill="#2166ac"/><rect x="2.5" y="13" width="8.4" height="8" fill="#2166ac"/><rect x="13.1" y="13" width="8.4" height="8" fill="#2166ac"/></svg>). Se abre el menú Inicio.</li>
   <li>Escribe <code>chrome</code> (o <code>edge</code>) → arriba aparece el programa →
       pulsa <span class="tecla">Enter</span>.</li>
   <li>El navegador se abre en una ventana grande. Listo para el siguiente paso.</li>

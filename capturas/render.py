@@ -416,7 +416,7 @@ def figuras():
         ('El nombre del Instituto:\nsi lo ves, abriste\nel programa correcto',
          idx(P1, 'INSTITUTO SUPERIOR'), 60),
         ('Aqui dice que Office se\nbaja de Microsoft',
-         idx(P1, 'Descarga directa desde'), 60)]))
+         idx(P1, 'Descarga directa desde'), 68)]))
 
     # --- 2. revision del equipo, dato por dato
     F.append(('figura-02.png', P1, [
@@ -438,23 +438,21 @@ def figuras():
          idx(P1, 'Office 2016 Professional'), 5),
         ('SI NO SABES CUAL:\nelige la 3',
          idx(P1, 'Office LTSC 2021 Professional'), 5),
-        ('Cuanto pesa la descarga',
-         idx(P1, '│  #  │ Versión'), 55),
-        ('Que programas trae',
-         idx(P1, 'Office LTSC 2024 Professional'), 66)]))
+        ('Aqui ves cuanto pesa\ncada version y que\nprogramas trae',
+         idx(P1, '│  #  │ Versión'), 76)]))
 
     # --- 4. las otras opciones del menu
     F.append(('figura-04.png', P1, [
         (1, idx(P1, '   OTRAS OPCIONES'),
             idx(P1, '└─────┴──────────────────────────────────────────────'), 2, 74)], [
         ('Para ACTIVAR Office\ndespues de instalarlo',
-         idx(P1, 'Activar Office con MAS'), 60),
+         idx(P1, 'Activar Office con MAS'), 72),
         ('Para comprobar que\nquedo activado',
-         idx(P1, 'Ver qué Office tengo'), 60),
+         idx(P1, 'Ver qué Office tengo'), 72),
         ('CUIDADO: esta borra Office',
-         idx(P1, 'Desinstalar Office de este'), 60),
+         idx(P1, 'Desinstalar Office de este'), 72),
         ('Para cerrar el programa',
-         idx(P1, 'Salir del programa'), 60)]))
+         idx(P1, 'Salir del programa'), 72)]))
 
     # --- 5. donde se escribe el numero
     F.append(('figura-05.png', P1, [], [
@@ -478,7 +476,7 @@ def figuras():
         ('LEE ESTO ANTES\nDE CONTINUAR',
          idx(P2, 'NO CIERRES ESTA VENTANA'), 45),
         ('Cierra Word y Excel\nsi los tienes abiertos',
-         idx(P2, 'Cierra Word, Excel y PowerPoint'), 60)]))
+         idx(P2, 'Cierra Word, Excel y PowerPoint'), 68)]))
 
     # --- 8. la confirmacion 1 / 2
     F.append(('figura-08.png', P2, [
@@ -563,7 +561,7 @@ RECORTES = {          # figura -> (texto donde empieza, texto donde acaba)
     'figura-03.png': ('   INSTALAR OFFICE', '   OTRAS OPCIONES'),
     'figura-04.png': ('   OTRAS OPCIONES', 'Escribe el número de la opción'),
     'figura-05.png': ('   OTRAS OPCIONES', None),
-    'figura-06.png': ('Resumen de lo que se va', 'NO CIERRES ESTA VENTANA'),
+    'figura-06.png': ('Resumen de lo que se va', 'NO CIERRES ESTA VENTANA', -2),
     'figura-07.png': ('NO CIERRES ESTA VENTANA', '¿Quieres instalarlo ahora?'),
     'figura-08.png': ('¿Quieres instalarlo ahora?', None),
     'figura-09.png': ('Descargando el instalador oficial', 'Preparando la configuración'),
@@ -593,9 +591,10 @@ if __name__ == '__main__':
                                 'Administrador: Windows PowerShell', AZUL_PS))
             continue
         if nombre in RECORTES:
-            ini, fin = RECORTES[nombre]
+            r = RECORTES[nombre]
+            ini, fin, ajuste = (r + (0,))[:3] if len(r) == 2 else r
             desde = max(0, idx(pantalla, ini) - 1)
-            hasta = (idx(pantalla, fin) if fin else len(pantalla))
+            hasta = (idx(pantalla, fin) + ajuste if fin else len(pantalla))
             # tras recortar, el recuadro sobra: la figura YA es esa zona
             pantalla, marcas, flechas = recortar(pantalla, [], flechas, desde, hasta)
         print(' ->', render(pantalla, base + nombre, marcas, flechas))

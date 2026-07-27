@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Manual paso a paso · Instalar Office desde cero</title>
+<style>
+  @page {
+    size: A4; margin: 2.2cm 2cm 2cm 2cm;
+    @bottom-center {
+      content: "Manual de usuario paso a paso desde cero · Material educativo para laboratorio · pág. " counter(page);
+      font-family: "DejaVu Sans", sans-serif; font-size: 7.5pt; color: #777;
+    }
+  }
+  @page :first { @bottom-center { content: ""; } }
+
+  body { font-family: "DejaVu Serif", Georgia, serif; font-size: 10.5pt;
+         line-height: 1.5; color: #1a1a1a; }
+
+  .inst { text-align: center; border-bottom: 2.5px solid #0d3b66; padding-bottom: 10px; }
+  .inst h1 { font-family: "DejaVu Sans", sans-serif; font-size: 13pt; margin: 0;
+             letter-spacing: .4px; color: #0d3b66; }
+  .inst h2 { font-family: "DejaVu Sans", sans-serif; font-size: 10.5pt; margin: 3px 0 0;
+             font-weight: normal; color: #333; }
+
+  .doctag { font-family: "DejaVu Sans", sans-serif; font-size: 8.5pt; letter-spacing: 1.2px;
+            color: #0d3b66; text-align: center; margin: 14px 0 2px; font-weight: bold; }
+  .titulo { font-family: "DejaVu Sans", sans-serif; font-size: 20pt; text-align: center;
+            margin: 0 0 4px; color: #111; }
+  .subtitulo { font-family: "DejaVu Sans", sans-serif; font-size: 9.5pt; text-align: center;
+               color: #444; margin: 0 0 3px; }
+
+  table.datos { width: 100%; border-collapse: collapse; font-family: "DejaVu Sans", sans-serif;
+                font-size: 8.5pt; margin: 14px 0 16px; }
+  table.datos td { border: 1px solid #c7d0d9; padding: 5px 8px; }
+  table.datos td.k { background: #eef3f8; font-weight: bold; width: 17%; color: #0d3b66; }
+
+  h3 { font-family: "DejaVu Sans", sans-serif; font-size: 12.5pt; color: #0d3b66;
+       margin: 22px 0 8px; padding-bottom: 4px; border-bottom: 1.5px solid #d7dee6;
+       page-break-after: avoid; }
+  h4.paso { font-family: "DejaVu Sans", sans-serif; font-size: 11pt; color: #0d3b66;
+            margin: 18px 0 8px; padding: 5px 10px; background: #eef3f8;
+            border-left: 4px solid #0d3b66; page-break-after: avoid; }
+  h5 { font-family: "DejaVu Sans", sans-serif; font-size: 9.5pt; margin: 14px 0 5px;
+       color: #333; page-break-after: avoid; }
+
+  p { margin: 8px 0; }
+  .chico { font-size: 9.5pt; }
+
+  .nota { background: #f4f7fa; border-left: 4px solid #0d3b66; padding: 9px 12px;
+          font-size: 9.5pt; margin: 12px 0; }
+  .alerta { background: #fff6e8; border-left: 4px solid #d98324; padding: 9px 12px;
+            font-size: 9.5pt; margin: 12px 0; }
+  .peligro { background: #fdeeee; border-left: 4px solid #c0392b; padding: 9px 12px;
+             font-size: 9.5pt; margin: 12px 0; }
+
+  ol.pasos { padding-left: 0; counter-reset: p; list-style: none; margin: 10px 0; }
+  ol.pasos > li { counter-increment: p; position: relative; padding-left: 34px;
+                  margin-bottom: 9px; page-break-inside: avoid; font-size: 10pt; }
+  ol.pasos > li::before { content: counter(p); position: absolute; left: 0; top: 1px;
+      width: 22px; height: 22px; background: #0d3b66; color: #fff; border-radius: 50%;
+      font-family: "DejaVu Sans", sans-serif; font-size: 9pt; font-weight: bold;
+      text-align: center; line-height: 22px; }
+  ol.pasos .sub { display: block; font-size: 9pt; color: #555; margin-top: 2px; }
+
+  .tecla { font-family: "DejaVu Sans", sans-serif; font-size: 8.5pt; border: 1px solid #999;
+           border-bottom-width: 2px; border-radius: 3px; padding: 1px 6px; background: #fafafa; }
+  .num { display: inline-block; background: #0d3b66; color: #fff; font-weight: bold;
+         font-family: "DejaVu Sans", sans-serif; font-size: 9pt; padding: 0 7px;
+         border-radius: 3px; }
+  code { font-family: "DejaVu Sans Mono", monospace; font-size: 9pt;
+         background: #f0f2f4; padding: 1px 4px; border-radius: 3px; }
+
+  figure { margin: 14px 0; page-break-inside: avoid; text-align: center; }
+  figure img { width: 100%; max-width: 16cm; border: 1px solid #bbb; }
+  figcaption { font-family: "DejaVu Sans", sans-serif; font-size: 8pt; color: #555;
+               margin-top: 5px; text-align: left; }
+  figcaption b { color: #111; }
+
+  .hueco { border: 2px dashed #b0bcc7; background: #f8fafb; padding: 20px 14px;
+           text-align: center; font-family: "DejaVu Sans", sans-serif; font-size: 9pt;
+           color: #667; margin: 14px 0; page-break-inside: avoid; }
+  .hueco b { display: block; color: #0d3b66; font-size: 9.5pt; margin-bottom: 4px; }
+
+  dl.glos { font-size: 9.5pt; margin: 8px 0; }
+  dl.glos dt { font-weight: bold; font-family: "DejaVu Sans", sans-serif; font-size: 9pt;
+               margin-top: 6px; }
+  dl.glos dd { margin: 1px 0 0 18px; }
+
+  table.tab { width: 100%; border-collapse: collapse; font-family: "DejaVu Sans", sans-serif;
+              font-size: 8.5pt; margin: 12px 0; page-break-inside: avoid; }
+  table.tab th { background: #0d3b66; color: #fff; padding: 6px 8px; text-align: left; }
+  table.tab td { border: 1px solid #c7d0d9; padding: 5px 8px; vertical-align: top; }
+  table.tab tr:nth-child(even) td { background: #f6f9fc; }
+
+  .resumen { background: #eef7ee; border: 1.5px solid #4a9a5a; border-radius: 5px;
+             padding: 11px 14px; font-size: 9.5pt; margin: 16px 0; }
+  .salto { page-break-before: always; }
+  .pie { margin-top: 22px; padding-top: 8px; border-top: 1px solid #ccc;
+         font-size: 8pt; color: #666; font-family: "DejaVu Sans", sans-serif; }
+</style>
+</head>
+<body>
+
+<div class="inst">
+  <h1>INSTITUTO SUPERIOR TECNOLÓGICO POLICÍA NACIONAL</h1>
+  <h2>Tecnología Superior Universitaria en Prevención del Delito y Seguridad Ciudadana</h2>
+</div>
+
+<div class="doctag">MANUAL DE USUARIO PASO A PASO (PARA PRINCIPIANTES)</div>
+<div class="titulo">Instalar Office desde cero</div>
+<div class="subtitulo">Unidad 1 · Sesión ____ — Instalación de software ofimático</div>
+<div class="subtitulo">Tarea ____</div>
+
+<table class="datos">
+  <tr><td class="k">Asignatura:</td><td>Competencias Digitales</td>
+      <td class="k">Docente:</td><td>Mgtr. María del Carmen Salazar Torres</td></tr>
+  <tr><td class="k">Unidad:</td><td>1 de 3</td>
+      <td class="k">Fecha de entrega (EVA):</td><td>______ / ______ / 2026</td></tr>
+  <tr><td class="k">Estudiante:</td><td>_______________________</td>
+      <td class="k">Curso / Paralelo:</td><td>Sección C</td></tr>
+  <tr><td class="k">Instrumento de evaluación:</td><td>Manual de usuario para principiantes</td>
+      <td class="k">Calificación:</td><td>____ / 5 puntos</td></tr>
+</table>
+
+<h3>1. Instrucciones</h3>
+<p class="chico">Este es un manual pensado para quien nunca ha instalado un programa.
+Empezamos desde encender la computadora y no damos nada por sabido. Cada captura lleva
+<b style="color:#c0392b">flechas rojas</b> que señalan exactamente dónde mirar y qué
+escribir. Siga los pasos en orden, sin saltarse ninguno: realice una acción y recién pase
+a la siguiente. Las pruebas se realizan en el laboratorio, nunca en el equipo real; al
+terminar se restaura el snapshot de la máquina virtual. Calcule entre 30 y 45 minutos.</p>
+
+<div class="nota"><b>Cómo leer este manual.</b> Las teclas del teclado se escriben así:
+<span class="tecla">Windows</span> <span class="tecla">Enter</span>. La flecha →
+significa «y luego» (por ejemplo: haz clic → escribe → pulsa Enter). Los números que hay
+que escribir en el programa aparecen así: <span class="num">3</span>.</div>
+
+<h3>2. Pequeño glosario (palabras que vamos a usar)</h3>
+<dl class="glos">
+  <dt>Clic</dt><dd>Presionar una vez el botón izquierdo del ratón (el mouse).</dd>
+  <dt>Doble clic</dt><dd>Presionar ese mismo botón dos veces seguidas y rápido.</dd>
+  <dt>Clic derecho</dt><dd>Presionar el botón derecho del ratón. Casi siempre abre un menucito con opciones.</dd>
+  <dt>Navegador</dt><dd>El programa para entrar a internet (Google Chrome o Microsoft Edge).</dd>
+  <dt>Barra de direcciones</dt><dd>La barra larga de arriba del navegador, donde se escribe la dirección de una página.</dd>
+  <dt>Menú Inicio</dt><dd>El menú que se abre al presionar la tecla <span class="tecla">Windows</span> (abajo a la izquierda).</dd>
+  <dt>Barra de tareas</dt><dd>La barra de iconos que está abajo del todo de la pantalla.</dd>
+  <dt>PowerShell</dt><dd>Un programa de Windows con fondo azul oscuro donde se escriben órdenes con el teclado. No tiene botones.</dd>
+  <dt>Comando</dt><dd>Una línea de texto que se le da a PowerShell para que haga algo. Nosotros la vamos a copiar y pegar, no a escribir a mano.</dd>
+  <dt>Administrador</dt><dd>Permiso especial que Windows pide para instalar programas. Sin él, la instalación no puede ni empezar.</dd>
+  <dt>Copiar y pegar</dt><dd>Copiar es guardar un texto en la memoria (<span class="tecla">Ctrl</span>+<span class="tecla">C</span>); pegar es soltarlo donde quieras (<span class="tecla">Ctrl</span>+<span class="tecla">V</span>).</dd>
+  <dt>Activar</dt><dd>Darle a Office una licencia para que funcione sin límites ni avisos.</dd>
+</dl>
+
+<h3>3. Historias de usuario (para qué sirve esto)</h3>
+<ul class="chico">
+  <li>Como estudiante que nunca ha instalado Office, quiero seguir pasos con imágenes,
+      flechas y números para no perderme en ningún momento.</li>
+  <li>Como usuario nuevo, quiero ver exactamente dónde hacer clic y qué número escribir
+      para no equivocarme ni entrar a una página falsa.</li>
+  <li>Como principiante, quiero reconocer la señal de que salió bien para quedarme tranquilo.</li>
+</ul>
+
+<div class="alerta"><b>Antes de empezar.</b> Esto se hace en la máquina virtual del
+laboratorio, nunca en tu computadora personal. Al terminar la práctica se restaura el
+snapshot y el equipo vuelve a quedar como estaba.</div>
+
+<h3 class="salto">4. Manual paso a paso</h3>
+
+<h4 class="paso">Paso A. Encender la computadora y entrar a Windows</h4>
+<ol class="pasos">
+  <li>Presiona el botón de encendido <b>una sola vez</b> y suéltalo.
+      <span class="sub">En una computadora de escritorio está en la torre (la caja grande).
+      En una laptop, arriba del teclado.</span></li>
+  <li>Espera sin tocar nada.
+      <span class="sub">Verás luces y quizá un logo. Puede tardar uno o dos minutos. Es normal.</span></li>
+  <li>Aparece una pantalla con la hora (se llama pantalla de bloqueo). Presiona cualquier
+      tecla o haz clic para continuar.</li>
+  <li>Escribe tu contraseña o PIN y pulsa <span class="tecla">Enter</span>.
+      <span class="sub">Si tu equipo no pide contraseña, entra directo.</span></li>
+  <li>Ya estás dentro cuando ves el fondo de pantalla con iconos y, abajo, la barra de tareas.</li>
+</ol>
+
+<h4 class="paso">Paso B. Abrir el navegador (Chrome o Edge)</h4>
+<p class="chico">El navegador es el programa para entrar a internet. Busca uno de estos dos iconos:</p>
+<ul class="chico">
+  <li><b>Google Chrome:</b> un círculo de colores (rojo, amarillo y verde) con un punto azul en el centro.</li>
+  <li><b>Microsoft Edge:</b> una ola o remolino en tonos azul y verde.</li>
+</ul>
+<ol class="pasos">
+  <li>Mira en la barra de abajo (barra de tareas) o en el escritorio. ¿Ves uno de esos
+      iconos? Haz clic (o doble clic si está en el escritorio).</li>
+  <li>¿No lo encuentras? Presiona la tecla <span class="tecla">Windows</span> del teclado
+      (la que tiene la ventanita). Se abre el menú Inicio.</li>
+  <li>Escribe <code>chrome</code> (o <code>edge</code>) → arriba aparece el programa →
+      pulsa <span class="tecla">Enter</span>.</li>
+  <li>El navegador se abre en una ventana grande. Listo para el siguiente paso.</li>
+</ol>
+
+<h4 class="paso">Paso C. Entrar a la página del instalador</h4>
+<ol class="pasos">
+  <li>Busca la barra larga de arriba (barra de direcciones) y haz <b>un clic dentro</b>.</li>
+  <li>Si tenía texto, bórralo con la tecla <b>Retroceso</b> (la flecha de borrar, arriba a
+      la derecha del teclado).</li>
+  <li>Escribe exactamente esta dirección y pulsa <span class="tecla">Enter</span>:
+      <div style="margin:8px 0 4px 0"><code style="font-size:9.5pt">github.com/MariaDSalazar/instalador-office-isupol</code></div></li>
+  <li>Comprueba que arriba diga <code>github.com</code> y el nombre correcto.
+      <span class="sub">Si te manda a descargar un <code>.exe</code> o el nombre es
+      distinto, cierra: es una copia falsa.</span></li>
+  <li>Baja con la rueda del mouse hasta el apartado <b>«Forma 1 · Un solo comando»</b>.</li>
+</ol>
+
+<div class="hueco"><b>Figura 1 · La página del instalador</b>
+Aquí va tu captura de la página en GitHub.<br>
+Marca con un círculo rojo nº1 la <b>barra de direcciones</b> y con un círculo nº2 el
+<b>recuadro oscuro con el comando</b>, que es el que copiaremos en el Paso D.</div>
+
+<h4 class="paso">Paso D. Copiar el comando</h4>
+<p class="chico">El comando es esta línea larga. <b>No hace falta escribirla a mano</b>, la
+vamos a copiar entera:</p>
+<div style="background:#0d1117; color:#e6edf3; font-family:'DejaVu Sans Mono',monospace;
+     font-size:8pt; padding:9px 11px; border-radius:5px; margin:9px 0; word-break:break-all">
+irm https://raw.githubusercontent.com/MariaDSalazar/instalador-office-isupol/main/office-isupol.ps1 | iex
+</div>
+<ol class="pasos">
+  <li>Pasa el mouse por encima del recuadro oscuro de la página; en la esquina derecha
+      aparece un <b>botoncito de copiar</b> (dos cuadraditos). Haz clic ahí.
+      <span class="sub">Si no aparece el botoncito, selecciona el texto con el mouse
+      arrastrando de principio a fin y presiona
+      <span class="tecla">Ctrl</span>+<span class="tecla">C</span>.</span></li>
+  <li>El comando ya está copiado, aunque no veas ningún cambio en la pantalla. Es normal.</li>
+  <li><b>No cierres el navegador todavía</b>, por si hay que copiarlo de nuevo.</li>
+</ol>
+
+<div class="nota"><b>¿Qué hace ese comando?</b> <code>irm</code> descarga el instalador
+desde la página, y <code>iex</code> lo ejecuta. Es la misma forma que usa massgrave.dev.
+El archivo viene del repositorio de la asignatura y descarga Office solo de los servidores
+de Microsoft.</div>
+
+<h4 class="paso">Paso E. Abrir PowerShell como administrador</h4>
+<ol class="pasos">
+  <li>Presiona la tecla <span class="tecla">Windows</span> → escribe <code>PowerShell</code>.</li>
+  <li>Arriba aparece «Windows PowerShell». <b>No pulses Enter todavía.</b></li>
+  <li>En el panel de la derecha haz clic en <b>«Ejecutar como administrador»</b>.
+      <span class="sub">Si no ves ese panel, haz clic derecho sobre «Windows PowerShell»
+      y elige esa misma opción del menú.</span></li>
+  <li>Es <b>muy importante</b> que sea la opción como administrador y no la normal: sin
+      esos permisos, la instalación no puede empezar.</li>
+  <li>Windows preguntará si permites cambios → haz clic en <b>Sí</b>.
+      <span class="sub">Ese aviso azul es normal y sale siempre.</span></li>
+</ol>
+
+<div class="hueco"><b>Figura 2 · Buscar PowerShell en el menú Inicio</b>
+Aquí va tu captura del menú Inicio con «PowerShell» escrito.<br>
+Marca con un recuadro rojo nº1 lo que escribiste y con un nº2 la opción
+<b>Ejecutar como administrador</b>.</div>
+
+<div class="hueco"><b>Figura 3 · El aviso de permisos</b>
+Aquí va tu captura del aviso azul «¿Quieres permitir que esta aplicación haga cambios en
+el dispositivo?».<br>Dibuja una flecha roja al botón <b>Sí</b>.</div>
+
+<figure>
+  <img src="capturas/figura-ps1.png" alt="PowerShell recién abierta">
+  <figcaption><b>Figura 4.</b> La ventana de PowerShell recién abierta. Fíjate en el
+  título de arriba: la palabra <b>«Administrador»</b> confirma que tiene los permisos
+  correctos. La flecha señala dónde vas a pegar el comando.</figcaption>
+</figure>
+
+<div class="peligro"><b>Si el título NO dice «Administrador»</b>, ciérrala y vuelve a
+abrirla con la opción <b>Ejecutar como administrador</b>. Si sigues sin esos permisos, el
+instalador te avisará en rojo y no podrá continuar.</div>
+
+<h4 class="paso">Paso F. Pegar el comando y ejecutarlo</h4>
+<ol class="pasos">
+  <li>Haz <b>clic derecho una sola vez</b> dentro de la ventana azul. El comando aparece solo.
+      <span class="sub">También sirve <span class="tecla">Ctrl</span>+<span class="tecla">V</span>.
+      En PowerShell el clic derecho pega directamente; es normal que no veas ningún menú.</span></li>
+  <li>Comprueba que el comando esté completo y que termine en <code>| iex</code>.</li>
+  <li>Pulsa <span class="tecla">Enter</span> y espera unos segundos.</li>
+  <li>Aparece la portada con el nombre del Instituto y el menú de opciones.</li>
+</ol>
+
+<figure>
+  <img src="capturas/figura-ps2.png" alt="El comando pegado en PowerShell">
+  <figcaption><b>Figura 5.</b> Así se ve el comando ya pegado, justo después de
+  <code>PS C:\Windows\system32&gt;</code>. Es tan largo que la consola lo parte en dos
+  líneas: es normal. Solo falta pulsar <span class="tecla">Enter</span>.</figcaption>
+</figure>
+
+<div class="alerta"><b>¿Sale un error en rojo y no aparece el menú?</b> Lo más común es que
+el comando se pegara a medias. Vuelve al Paso D, cópialo entero otra vez y repite. Si el
+error habla de «ExecutionPolicy», usa la otra forma de instalar (sección 5).</div>
+
+<figure>
+  <img src="capturas/figura-01.png" alt="Portada del instalador">
+  <figcaption><b>Figura 6.</b> Lo primero que aparece tras pulsar Enter. Si ves el nombre
+  del Instituto y el título «INSTALADOR DE OFFICE», todo va bien.</figcaption>
+</figure>
+
+<h4 class="paso">Paso G. Leer la revisión del equipo</h4>
+<p class="chico">Antes de descargar nada, el programa revisa tu computadora.
+<b>Todo lo que esté en verde está bien.</b> Si algo sale en rojo, se detiene y te explica
+qué hacer.</p>
+
+<figure>
+  <img src="capturas/figura-02.png" alt="Revisión del equipo">
+  <figcaption><b>Figura 7.</b> La tabla de revisión. Las flechas explican qué significa
+  cada línea. La más importante es <b>Permisos</b>: tiene que decir «Administrador» y
+  estar en verde.</figcaption>
+</figure>
+
+<table class="tab">
+  <tr><th style="width:22%">Línea</th><th>Qué significa</th><th style="width:26%">Debe decir</th></tr>
+  <tr><td>Sistema</td><td>Qué versión de Windows tienes</td><td>Windows 10 o Windows 11</td></tr>
+  <tr><td>Arquitectura</td><td>Si tu Windows es de 32 o 64 bits. Se detecta solo</td><td>64 bits (lo normal)</td></tr>
+  <tr><td>Permisos</td><td>Si tiene permiso para instalar</td><td><b>Administrador</b>, en verde</td></tr>
+  <tr><td>Espacio en C:</td><td>Cuánto espacio libre queda en el disco</td><td>Al menos 5 GB</td></tr>
+  <tr><td>Defender</td><td>Si el antivirus está encendido. Solo informativo</td><td>Cualquiera de las dos</td></tr>
+  <tr><td>Office</td><td>Si ya hay un Office instalado</td><td>Cualquiera de las dos</td></tr>
+</table>
+
+<h4 class="paso">Paso H. Elegir qué Office quieres instalar</h4>
+<p class="chico">Debajo de la revisión aparece el menú, dividido en dos tablas.
+<b>Todo se elige escribiendo un número y pulsando <span class="tecla">Enter</span>.</b>
+El ratón no sirve aquí.</p>
+
+<figure>
+  <img src="capturas/figura-03.png" alt="Tabla de versiones">
+  <figcaption><b>Figura 8.</b> La primera tabla: las cuatro versiones que puedes instalar.
+  La primera columna es el número que vas a escribir. Si no sabes cuál elegir, la flecha
+  te señala la <b>opción 3</b>.</figcaption>
+</figure>
+
+<table class="tab">
+  <tr><th style="width:9%">Número</th><th>Qué instala</th><th style="width:26%">Aplicaciones</th></tr>
+  <tr><td><span class="num">1</span></td><td>Office 2016 Professional Plus</td><td>La suite completa</td></tr>
+  <tr><td><span class="num">2</span></td><td>Office 2019 Professional Plus</td><td>Word, Excel, PowerPoint</td></tr>
+  <tr><td><span class="num">3</span></td><td>Office LTSC 2021 Professional Plus</td><td>Word, Excel, PowerPoint</td></tr>
+  <tr><td><span class="num">4</span></td><td>Office LTSC 2024 Professional Plus</td><td>Word, Excel, PowerPoint</td></tr>
+</table>
+<p class="chico" style="color:#555">La opción 1 instala además Access, Publisher y OneNote,
+porque en esa versión Microsoft no permite elegir aplicaciones sueltas.</p>
+
+<figure>
+  <img src="capturas/figura-04.png" alt="Otras opciones del menú">
+  <figcaption><b>Figura 9.</b> La segunda tabla: lo que <i>no</i> es instalar. Aquí está la
+  opción <b>5</b> para activar, la <b>6</b> para comprobar y la <b>9</b> para salir. Fíjate
+  en la advertencia de la opción 7.</figcaption>
+</figure>
+
+<figure>
+  <img src="capturas/figura-05.png" alt="Dónde escribir el número">
+  <figcaption><b>Figura 10.</b> La última línea de la pantalla es donde escribes. La flecha
+  señala el sitio exacto: teclea el número y pulsa <span class="tecla">Enter</span>.</figcaption>
+</figure>
+
+<ol class="pasos">
+  <li>Decide qué versión quieres con la tabla de arriba.
+      <span class="sub">Si no sabes cuál, elige la <span class="num">3</span>. Es la más
+      usada y trae solo Word, Excel y PowerPoint.</span></li>
+  <li>Escribe ese número con el teclado. Aparecerá al final de la línea, en amarillo.</li>
+  <li>Pulsa <span class="tecla">Enter</span>.</li>
+</ol>
+
+<div class="nota"><b>¿Te equivocaste de tecla?</b> Si escribes una letra o un número que no
+existe, el programa te avisa en rojo y te devuelve al menú. No pasa nada malo, puedes
+volver a intentarlo las veces que quieras.</div>
+
+<h4 class="paso">Paso I. Confirmar y esperar</h4>
+<p class="chico">El programa nunca instala nada sin preguntarte. Primero te enseña un
+resumen para que compruebes que elegiste bien.</p>
+
+<figure>
+  <img src="capturas/figura-06.png" alt="Resumen de la instalación">
+  <figcaption><b>Figura 11.</b> El resumen. Las flechas señalan las tres cosas que revisar:
+  la versión, los programas que trae y cuánto se va a descargar.</figcaption>
+</figure>
+
+<figure>
+  <img src="capturas/figura-07.png" alt="Aviso de no cerrar">
+  <figcaption><b>Figura 12.</b> El aviso amarillo. Léelo entero antes de seguir: hay que
+  cerrar Word, Excel y PowerPoint si los tienes abiertos.</figcaption>
+</figure>
+
+<figure>
+  <img src="capturas/figura-08.png" alt="Confirmación 1 o 2">
+  <figcaption><b>Figura 13.</b> La confirmación. Aquí no se escribe «sí» ni «no»: se
+  escribe <b>1</b> para instalar o <b>2</b> para volver al menú.</figcaption>
+</figure>
+
+<ol class="pasos">
+  <li>Cierra Word, Excel y PowerPoint si los tienes abiertos.</li>
+  <li>Lee el resumen y comprueba que sea la versión correcta.</li>
+  <li>Escribe <span class="num">1</span> → <span class="tecla">Enter</span> para empezar.</li>
+</ol>
+
+<div class="peligro"><b>No cierres la ventana azul.</b> La descarga y la instalación tardan
+entre 10 y 30 minutos según tu internet. Si la cierras a la mitad, Office queda instalado
+a medias y hay que empezar de nuevo. El programa te avisará <b>en verde</b> cuando puedas
+cerrar.</div>
+
+<figure>
+  <img src="capturas/figura-09.png" alt="Barra de descarga">
+  <figcaption><b>Figura 14.</b> La barra de descarga. Se llena sola de izquierda a derecha.
+  Las flechas señalan el porcentaje (va de 0 a 100) y los megabytes bajados.</figcaption>
+</figure>
+
+<figure>
+  <img src="capturas/figura-10.png" alt="Los tres pasos de la instalación">
+  <figcaption><b>Figura 15.</b> Los tres pasos. El más largo es el tercero. La flecha señala
+  el reloj: <b>mientras ese número avance, todo va bien</b>, aunque la pantalla parezca
+  detenida.</figcaption>
+</figure>
+
+<div class="nota"><b>Se abrirá otra ventana azul de Microsoft</b> con su propia barra de
+progreso. Es normal, es el instalador oficial haciendo su trabajo. No la cierres tampoco.</div>
+
+<figure>
+  <img src="capturas/figura-11.png" alt="Office instalado correctamente">
+  <figcaption><b>Figura 16.</b> <b>La señal de que salió bien:</b> el cartel verde. Las
+  flechas señalan la confirmación y el siguiente paso. Si ves esto, Office ya está
+  instalado.</figcaption>
+</figure>
+
+<h4 class="paso">Paso J. Activar Office</h4>
+<p class="chico">Office ya está instalado, pero le falta la licencia. Desde el menú,
+escribe <span class="num">5</span>.</p>
+
+<figure>
+  <img src="capturas/figura-12.png" alt="Aviso sobre el antivirus">
+  <figcaption><b>Figura 17.</b> El aviso naranja sobre el antivirus. Las flechas señalan
+  las dos partes importantes: que no es un virus de verdad, y los pasos para apagar la
+  protección un rato si hiciera falta.</figcaption>
+</figure>
+
+<div class="alerta"><b>Por qué el antivirus se queja.</b> Windows Defender marca
+<i>todas</i> las herramientas de activación, aunque no sean dañinas. La propia página
+massgrave.dev lo advierte. Si te lo bloquea: abre <b>Seguridad de Windows</b> →
+<b>Protección antivirus y contra amenazas</b> → <b>Administrar la configuración</b> →
+apaga <b>Protección en tiempo real</b> → activa Office →
+<b>vuelve a encenderla al terminar</b>. No dejes el antivirus apagado.</div>
+
+<figure>
+  <img src="capturas/figura-13.png" alt="Números que se usan en MAS">
+  <figcaption><b>Figura 18.</b> Ojo con esto: hay dos menús distintos. La flecha de abajo es
+  el <b>1</b> de <i>nuestro</i> programa (abrir MAS). La de arriba es el <b>2</b> que
+  escribirás <i>dentro</i> de MAS, que es otro menú.</figcaption>
+</figure>
+
+<ol class="pasos">
+  <li>En el menú escribe <span class="num">5</span> → <span class="tecla">Enter</span>.</li>
+  <li>Lee el aviso naranja del antivirus.</li>
+  <li>Escribe <span class="num">1</span> → <span class="tecla">Enter</span> para abrir MAS.</li>
+  <li>Se abre el menú de MAS, con opciones de colores.
+      <span class="sub">Es otro programa distinto, con su propio menú. Ya no estás en el nuestro.</span></li>
+  <li>Con Office cerrado, escribe <span class="num">2</span> → <span class="tecla">Enter</span>.
+      <span class="sub">El 2 de MAS es «Office». El 1 sería Windows, que aquí no toca.</span></li>
+  <li>Espera sin tocar nada hasta que aparezca una <b>línea en verde</b>. Office quedó activado.</li>
+  <li>Escribe <span class="num">0</span> → <span class="tecla">Enter</span> para salir de MAS.</li>
+</ol>
+
+<div class="hueco"><b>Figura 19 · El menú de MAS</b>
+Aquí va tu captura del menú de MAS ya abierto.<br>
+Dibuja una flecha roja a la opción <b>2</b> (Office), que es la que vas a escribir.</div>
+
+<div class="hueco"><b>Figura 20 · La señal de éxito de MAS</b>
+Aquí va tu captura de la línea verde que confirma que Office quedó activado.<br>
+Dibuja una flecha roja a esa línea con el texto «esta es la señal de que salió bien».</div>
+
+<h4 class="paso">Paso K. Comprobar que quedó activado</h4>
+<ol class="pasos">
+  <li>En nuestro menú escribe <span class="num">6</span> → <span class="tecla">Enter</span>.</li>
+  <li>Busca la línea <code>LICENSE STATUS</code>. Si pone <code>---LICENSED---</code>,
+      está activado.</li>
+</ol>
+
+<figure>
+  <img src="capturas/figura-14.png" alt="Comprobar la licencia">
+  <figcaption><b>Figura 21.</b> El recuadro muestra qué versión tienes instalada. La flecha
+  de abajo señala la línea que confirma la activación.</figcaption>
+</figure>
+
+<p class="chico">También puedes comprobarlo desde el propio Word: ábrelo → <b>Archivo</b> →
+<b>Cuenta</b>. Debe decir que el producto está activado.</p>
+
+<h4 class="paso">Paso L. Cerrar todo con calma</h4>
+<ol class="pasos">
+  <li>En el menú escribe <span class="num">9</span> → <span class="tecla">Enter</span>.</li>
+  <li>Presiona cualquier tecla cuando aparezca el mensaje verde de despedida.</li>
+  <li>Cierra la ventana de PowerShell con la <b>X</b> de la esquina de arriba a la derecha.</li>
+  <li>Cierra también el navegador con su <b>X</b>.</li>
+  <li>Si trabajaste en el laboratorio, restaura el snapshot al terminar.</li>
+</ol>
+
+<h3 class="salto">5. Otra forma: descargar los archivos y hacer doble clic</h3>
+<p class="chico">Si el comando no funciona en tu equipo (por ejemplo, si sale un error de
+«ExecutionPolicy»), puedes descargar los archivos y abrirlos directamente.</p>
+<table class="tab">
+  <tr><th style="width:38%">Archivo</th><th>Para qué sirve</th></tr>
+  <tr><td><code>Instalar-Office.cmd</code></td>
+      <td><b>Este es el que abres tú.</b> Pide los permisos de administrador y arranca el otro.</td></tr>
+  <tr><td><code>office-isupol.ps1</code></td>
+      <td>Es el programa de verdad. <b>No lo abras directamente</b>, se abre solo.</td></tr>
+</table>
+<ol class="pasos">
+  <li>En la página de GitHub haz clic en el botón verde <b>Code</b> → <b>Download ZIP</b>.</li>
+  <li>Abre la carpeta <b>Descargas</b>, haz clic derecho en el ZIP → <b>Extraer todo</b>.</li>
+  <li>Comprueba que <code>Instalar-Office.cmd</code> y <code>office-isupol.ps1</code> estén
+      <b>en la misma carpeta</b>.</li>
+  <li>Haz <b>doble clic</b> en <code>Instalar-Office.cmd</code> y acepta el aviso de permisos.</li>
+  <li>A partir de aquí, sigue desde el <b>Paso G</b> de este manual.</li>
+</ol>
+<div class="alerta"><b>¿No pasó nada al hacer doble clic?</b> Windows bloquea los archivos
+bajados de internet. Haz clic derecho sobre <code>office-isupol.ps1</code> →
+<b>Propiedades</b> → abajo marca <b>Desbloquear</b> → <b>Aceptar</b>, y vuelve a intentarlo.</div>
+
+<h3>6. Si algo sale mal</h3>
+<table class="tab">
+  <tr><th style="width:36%">Lo que ves</th><th>Qué hacer</th></tr>
+  <tr><td>Un error rojo largo al pulsar Enter</td>
+      <td>El comando se pegó a medias. Vuelve al Paso D y cópialo entero otra vez.</td></tr>
+  <tr><td>«no se puede cargar el archivo… ExecutionPolicy»</td>
+      <td>Windows tiene bloqueada la ejecución de scripts. Usa la otra forma (sección 5).</td></tr>
+  <tr><td>«FALTAN PERMISOS DE ADMINISTRADOR»</td>
+      <td>Abriste PowerShell normal. Ciérralo y ábrelo con <b>Ejecutar como administrador</b>
+          (Paso E).</td></tr>
+  <tr><td>«SIN CONEXIÓN A INTERNET»</td>
+      <td>Revisa el cable o el WiFi. Hace falta internet para descargar Office de Microsoft.</td></tr>
+  <tr><td>«ESPACIO INSUFICIENTE EN EL DISCO»</td>
+      <td>Libera al menos 5 GB y vuelve a ejecutar el comando.</td></tr>
+  <tr><td>Los bordes salen como símbolos raros</td>
+      <td>Pasa al usar la ventana equivocada. Ábrela con el <code>.cmd</code> (sección 5),
+          que configura bien la consola.</td></tr>
+  <tr><td>«ESA OPCIÓN NO EXISTE»</td>
+      <td>Escribiste una letra o un número fuera del 1 al 9. Vuelve a intentarlo.</td></tr>
+  <tr><td>Parece congelado durante la instalación</td>
+      <td>Mira el reloj que va contando (Figura 15). Si avanza, está trabajando.</td></tr>
+  <tr><td>El antivirus bloquea MAS</td>
+      <td>Es lo más común y está explicado en el Paso J.</td></tr>
+</table>
+
+<figure>
+  <img src="capturas/figura-16.png" alt="Error de permisos">
+  <figcaption><b>Figura 22.</b> Así se ve el aviso cuando faltan permisos de administrador.
+  El propio programa te dice qué hacer; la flecha señala la instrucción.</figcaption>
+</figure>
+
+<h3>7. Cuidado con la opción 7</h3>
+<p class="chico">La opción <span class="num">7</span> borra Office del equipo. Para que
+nadie la ejecute sin querer, aquí los números están <b>al revés</b> que en el resto del
+programa: el <b>1 cancela</b> y solo el <b>2</b> borra.</p>
+
+<figure>
+  <img src="capturas/figura-15.png" alt="Desinstalar Office">
+  <figcaption><b>Figura 23.</b> El recuadro avisa del cambio de orden. Las flechas señalan
+  cada opción: fíjate bien antes de escribir. Tus documentos no se borran, solo los
+  programas.</figcaption>
+</figure>
+
+<div class="resumen"><b>Resumen en una frase:</b> enciendes el equipo → abres el navegador →
+entras a <code>github.com/MariaDSalazar/instalador-office-isupol</code> → copias el comando →
+abres PowerShell <b>como administrador</b> → clic derecho para pegar → <span class="tecla">Enter</span> →
+escribes el número de la versión (por ejemplo <b>3</b>) → escribes <b>1</b> para confirmar →
+esperas el cartel verde → escribes <b>5</b> para activar → escribes <b>1</b> para abrir MAS →
+dentro de MAS escribes <b>2</b> → esperas la línea verde → escribes <b>0</b> para salir de MAS →
+escribes <b>6</b> para comprobar → escribes <b>9</b> para salir. ¡Listo!</div>
+
+<div class="peligro"><b>Recordatorio importante:</b> este manual es para aprender y
+practicar en un entorno de laboratorio. Activar productos para no pagar la licencia va
+contra los términos de Microsoft. La idea es entender cómo funciona, con responsabilidad.</div>
+
+<h3>Bibliografía</h3>
+<p style="font-size:8.5pt; line-height:1.45">
+Microsoft. (2024). <i>Configuration options for the Office Deployment Tool</i>. Microsoft Learn.
+https://learn.microsoft.com/microsoft-365-apps/deploy/office-deployment-tool-configuration-options<br>
+Microsoft. (2025). <i>Product IDs supported by the Office Deployment Tool for Click-to-Run</i>. Microsoft Learn.
+https://learn.microsoft.com/previous-versions/troubleshoot/microsoft-365/microsoft-365-apps/office-suite-problems/product-ids-supported-office-deployment-click-to-run<br>
+Microsoft. (2024). <i>Overview of the Office Deployment Tool</i>. Microsoft Learn.
+https://learn.microsoft.com/microsoft-365-apps/deploy/overview-office-deployment-tool<br>
+Microsoft. (2024). <i>Update channel for Office LTSC 2021</i>. Microsoft Learn.
+https://learn.microsoft.com/office/ltsc/2021/update<br>
+Massgrave. (2026). <i>Microsoft Activation Scripts (MAS)</i>. https://massgrave.dev
+</p>
+
+<div class="pie">Manual de usuario paso a paso desde cero · Instalador de Office ISUPOL ·
+Material educativo para practicar en un entorno de laboratorio.<br>
+El instalador descarga Office únicamente de los servidores oficiales de Microsoft
+(officecdn.microsoft.com y c2rsetup.officeapps.live.com).</div>
+
+</body>
+</html>

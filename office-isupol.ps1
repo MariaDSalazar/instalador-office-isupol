@@ -14,6 +14,9 @@
 
 $ErrorActionPreference = 'Stop'
 $ProgressPreference    = 'SilentlyContinue'
+# Windows 10 sin actualizar negocia TLS 1.0 y los servidores de Microsoft
+# lo rechazan: sin esto la descarga falla con "conexion cerrada".
+try { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 } catch {}
 try { [Console]::OutputEncoding = [Text.Encoding]::UTF8 } catch {}
 try { $Host.UI.RawUI.WindowTitle = 'ISUPOL  ·  Instalador de Office' } catch {}
 
